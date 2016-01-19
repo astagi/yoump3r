@@ -1,0 +1,20 @@
+{
+  "name": "yoump3r",
+  "version": "0.1.0",
+  "authors": [
+    "Andrea Stagi <stagi.andrea@gmail.com>"
+  ],
+  "description": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "static/lib/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.1"
+  }
+}
