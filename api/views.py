@@ -17,7 +17,7 @@ class SongViewSet(viewsets.GenericViewSet):
     @list_route(methods=['get'])
     def search(self, request):
         try:
-            songs = youtube_mp3.search('883 - Sei un mito')
+            songs = youtube_mp3.search(request.GET.get('q', ''))
             return Response(songs)
         except YouTubeToMp3ServiceException as ex:
             return Response({'error': unicode(ex)}, 400)
