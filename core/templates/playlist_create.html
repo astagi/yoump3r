@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="yoump3r">
 <head>
     <script src="{% static "js/bundle.min.js" %}"></script>
     <link rel="stylesheet" href="{% static "css/bundle.min.css" %}" />
@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div>
+    <div ng-controller="CreatePlaylistController">
         Ciao
     </div>
 </body>

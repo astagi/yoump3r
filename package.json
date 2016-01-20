@@ -1,0 +1,36 @@
+{
+  "author": "Andrea Stagi <stagi.andrea@gmail.com>",
+  "license": "MIT",
+  "name": "yoump3r",
+  "description": "A simple web service to make my personal mp3 playlist from YouTube",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/astagi/yoump3r.git"
+  },
+  "bugs": {
+    "url": "https://github.com/astagi/yoump3r/issues"
+  },
+  "keywords": [
+    "mp3",
+    "playlist",
+    "music",
+    "youtube"
+  ],
+  "main": "./index.js",
+  "engines": {
+    "node": ">=0.8"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.1"
+  }
+}

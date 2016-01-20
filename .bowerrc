@@ -1,5 +1,5 @@
 {
-  "directory": "static/libs/",
+  "directory": "js/libs/",
   "analytics": false,
   "timeout": 120000,
   "registry": {
