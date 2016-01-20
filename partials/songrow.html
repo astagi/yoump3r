@@ -1,0 +1,12 @@
+<iframe style="width: 0px; height: 0px; display:block; visibility:hidden;" ng-src="{{downloadMp3Url}}"> </iframe>
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon1">Artist:</span>
+  <input type="text" class="form-control" placeholder="Insert the artist" aria-describedby="basic-addon1" ng-model="artist" ng-change="searchSong()">
+  <span class="input-group-addon" id="basic-addon1">Song:</span>
+  <input type="text" class="form-control" placeholder="Insert the song" aria-describedby="basic-addon1" ng-model="song" ng-change="searchSong()">
+  <button ng-click="onDeleteSong()" type="submit" class="btn btn-default">-</button>
+  <a href="#" ng-click="downloadSong()">Download</a>
+</div>
+<div class="list-group">
+  <a href="#" ng-click="selectSong(song)" ng-repeat="song in suggestedSongs" class="list-group-item">{{song.title}}</a>
+</div>

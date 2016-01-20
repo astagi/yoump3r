@@ -3,7 +3,7 @@ angular.module('yoump3r.services.client', [])
 
     var urlBase = '/api/v1';
 
-    this.searchSongs = function (query) {
+    this.searchSong = function (query) {
       return $http.get(urlBase + '/songs/search/?q=' + query);
     };
 
