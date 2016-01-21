@@ -2,8 +2,11 @@
 <div class="input-group">
   <span class="input-group-addon" id="basic-addon1">Artist:</span>
   <input type="text" class="form-control" placeholder="Insert the artist" aria-describedby="basic-addon1" ng-model="artist" ng-change="searchSong()">
-  <span class="input-group-addon" id="basic-addon1">Song:</span>
-  <input type="text" class="form-control" placeholder="Insert the song" aria-describedby="basic-addon1" ng-model="song" ng-change="searchSong()">
+  <span class="input-group-addon" id="basic-addon2">Song:</span>
+  <input type="text" class="form-control" placeholder="Insert the song" aria-describedby="basic-addon2" ng-model="song" ng-change="searchSong()">
+
+</div>
+<div class="input-group">
   <button ng-click="onDeleteSong()" type="submit" class="btn btn-default">-</button>
   <a href="#" ng-click="downloadSong()">Download</a>
 </div>
