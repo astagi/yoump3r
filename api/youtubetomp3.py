@@ -32,7 +32,8 @@ class YouTubeToMp3Service(object):
             search_response = self._youtube.search().list(
                 q=query,
                 part=part,
-                maxResults=maxResults
+                maxResults=maxResults,
+                type='video'
             ).execute()
 
             youtube_items = search_response.get("items", [])
