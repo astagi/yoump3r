@@ -1,4 +1,4 @@
-angular.module('yoump3r.components', ['yoump3r.services.client'])
+angular.module('yoump3r.components', ['yoump3r.services.client', 'yoump3r.filters'])
 
 .directive('songRow', ['yoump3rclient', function (yoump3rclient) {
   return {

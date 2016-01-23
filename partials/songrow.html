@@ -11,5 +11,5 @@
   <a href="#" ng-click="downloadSong()">Download</a>
 </div>
 <div class="list-group">
-  <a href="#" ng-click="selectSong(song)" ng-repeat="song in suggestedSongs" class="list-group-item">{{song.title}}</a>
+  <a href="#" ng-click="selectSong(song)" ng-repeat="song in suggestedSongs|orderSongs:selectedSong" ng-class="{'selected' : $index == 0}" class="list-group-item">{{song.title}}</a>
 </div>
