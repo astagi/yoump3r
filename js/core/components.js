@@ -8,14 +8,22 @@ angular.module('yoump3r.components', ['yoump3r.services.client', 'yoump3r.filter
     },
     templateUrl: '/static/partials/songrow.html',
     controller: ['$scope', '$element', '$timeout', '$q', function ( $scope, $element, $timeout, $q ) {
-      $scope.selectedSong = {};
-      $scope.suggestedSongs = [];
+      $scope.selectedSong;
+      $scope.showSuggestions = false;
+      $scope.suggestedSongs;
       $scope.song = '';
       $scope.artist = '';
       $scope.title = '';
       $scope.downloadMp3Url = '';
       $scope.qTimeout;
       $scope.qHttp;
+
+      $scope.canShowSuggestions = function () {
+        return ($scope.showSuggestions == true && $scope.suggestedSongs.length)
+      };
+      $scope.toggleShowSuggestions = function() {
+        $scope.showSuggestions = !$scope.showSuggestions;
+      }
       $scope.downloadSong = function () {
         $scope.downloadMp3Url = 'http://www.youtubeinmp3.com/download/?video=https://www.youtube.com/watch?v=' + $scope.selectedSong.id + '&autostart=1';
       };
