@@ -18,6 +18,9 @@ angular.module('yoump3r.components', ['yoump3r.services.client', 'yoump3r.filter
       $scope.qTimeout;
       $scope.qHttp;
 
+      $scope.removeSong = function () {
+        $scope.onDeleteSong({deletedSong: $scope.ngModel});
+      }
       $scope.canShowSuggestions = function () {
         return ($scope.showSuggestions == true && $scope.suggestedSongs.length)
       };

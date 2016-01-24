@@ -5,12 +5,19 @@ angular.module('yoump3r.controllers', ['yoump3r.services.client'])
 }])
 
 .controller('CreatePlaylistController', ['$scope', 'yoump3rclient', function($scope, yoump3rclient) {
-  console.log('Hello yoump3r!');
+
   $scope.songs = [{}];
-  $scope.deleteSong = function() {
+
+  $scope.deleteSong = function(deletedSong) {
+    for (var i = 0 ; i < $scope.songs.length ; i++) {
+      if ($scope.songs[i].$$hashKey == deletedSong.$$hashKey) {
+        $scope.songs.splice(i, 1);
+      }
+    }
   };
+
   $scope.addNewSong = function() {
-    console.log('New song');
     $scope.songs.push({});
   };
+
 }]);
