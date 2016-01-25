@@ -11,7 +11,7 @@ angular.module('yoump3r.components', ['yoump3r.services.client', 'yoump3r.filter
       $scope.selectedSong;
       $scope.showSuggestions = false;
       $scope.suggestedSongs;
-      $scope.song = '';
+      $scope.songSearch = '';
       $scope.artist = '';
       $scope.title = '';
       $scope.downloadMp3Url = '';
@@ -34,7 +34,6 @@ angular.module('yoump3r.components', ['yoump3r.services.client', 'yoump3r.filter
         $scope.selectedSong = song;
       };
       $scope.searchSong = function () {
-        $scope.title = $scope.artist + ' - ' + $scope.song;
         if ( $scope.qTimeout ) {
           $timeout.cancel($scope.qTimeout);
         }
@@ -43,7 +42,7 @@ angular.module('yoump3r.components', ['yoump3r.services.client', 'yoump3r.filter
         }
         $scope.qHttp = $q.defer();
         $scope.qTimeout = $timeout(function () {
-          yoump3rclient.searchSong($scope.title, $scope.qHttp)
+          yoump3rclient.searchSong($scope.songSearch, $scope.qHttp)
           .success(function (songs) {
             console.log(songs);
             $scope.suggestedSongs = songs;
