@@ -55,7 +55,7 @@ angular.module('yoump3r.components', ['yoump3r.services.client', 'yoump3r.filter
             $scope.selectSong(songs[0]);
           })
           .error(function (error) {
-            console.log(error);
+
           });
         }, 200);
       };

@@ -1,6 +1,8 @@
 var gulp = require('gulp');
+var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var minifyCss = require('gulp-minify-css');
 var sourcemaps = require('gulp-sourcemaps');
 
 var paths = {
@@ -23,4 +25,12 @@ gulp.task('partials', function(){
   .pipe(gulp.dest('static/partials'));
 });
 
-gulp.task('default', ['scripts', 'partials']);
+gulp.task('sass', function () {
+  gulp.src('./sass/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(concat('bundle.min.css'))
+    .pipe(minifyCss({compatibility: 'ie8'}))
+    .pipe(gulp.dest('static/css'));
+});
+
+gulp.task('default', ['scripts', 'partials', 'sass']);
