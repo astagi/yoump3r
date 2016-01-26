@@ -10,7 +10,7 @@
 
 <body>
     <div ng-controller="CreatePlaylistController">
-        <song-row on-delete-song="deleteSong()" ng-model="song" ng-repeat="song in songs">
+        <song-row on-delete-song="deleteSong(deletedSong)" ng-model="song" ng-repeat="song in songs">
         </song-row>
         <button ng-click="addNewSong()" type="submit" class="btn btn-default">+</button>
     </div>
