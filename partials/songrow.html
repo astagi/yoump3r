@@ -1,13 +1,15 @@
-<iframe style="width: 0px; height: 0px; display:block; visibility:hidden;" ng-src="{{downloadMp3Url}}"> </iframe>
-<div class="input-group">
-  <span class="input-group-addon" id="basic-addon2">Song:</span>
-  <input type="text" class="form-control" placeholder="Insert the song" aria-describedby="basic-addon2" ng-model="songSearch" ng-change="searchSong()">
-</div>
-<div class="input-group">
-  <a href="#" ng-click="removeSong()">Remove</a>
-  <a href="#" ng-click="downloadSong()" ng-show="selectedSong">Download MP3</a>
-  <a href="#" ng-click="toggleShowSuggestions()" ng-show="suggestedSongs">{{showSuggestions ? 'Hide suggested' : 'Show suggested'}}</a>
-</div>
-<div class="list-group">
-  <a href="#" ng-hide="$index > 0 && !showSuggestions" ng-click="selectSong(song)" ng-repeat="song in suggestedSongs|orderSongs:selectedSong" ng-class="{'selected' : $index == 0}" class="list-group-item">{{song.title}}</a>
+<div>
+    <iframe style="width: 0px; height: 0px; display:block; visibility:hidden;" ng-src="{{downloadMp3Url}}"> </iframe>
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon2">Song</span>
+      <input type="text" class="form-control" placeholder="Insert the song" aria-describedby="basic-addon2" ng-model="songSearch" ng-change="searchSong()">
+    </div>
+    <div class="input-group center-block">
+      <a href="#" ng-click="removeSong()">Remove</a>
+      <a href="#" ng-click="downloadSong()" ng-show="selectedSong">Download MP3</a>
+      <a href="#" ng-click="toggleShowSuggestions()" ng-show="suggestedSongs">{{showSuggestions ? 'Hide suggested' : 'Show suggested'}}</a>
+    </div>
+    <div class="suggested-songs-list">
+      <a href="#" ng-hide="$index > 0 && !showSuggestions" ng-click="selectSong(song)" ng-repeat="song in suggestedSongs|orderSongs:selectedSong" ng-class="{'selected' : $index == 0}" class="suggested-song">{{song.title}}</a>
+    </div>
 </div>

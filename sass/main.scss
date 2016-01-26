@@ -1,1 +1,30 @@
 @import "../js/libs/bootstrap-sass/assets/stylesheets/bootstrap";
+
+$suggested-song-border-radius: 0px !default;
+$suggested-song-color: white;
+$suggested-song-background-color: green;
+
+.suggested-songs-list {
+  @extend .list-group;
+  margin-bottom: 5px;
+}
+
+.suggested-song {
+  @extend .list-group-item;
+  &:first-child {
+    background: green;
+    color: white;
+    @include border-top-radius($suggested-song-border-radius);
+  }
+  &:last-child {
+    @include border-bottom-radius($suggested-song-border-radius);
+  }
+}
+
+a.suggested-song, button.suggested-song {
+  &:hover, &:focus, &.active:hover, &.active:focus {
+    text-decoration: none;
+    color: $suggested-song-color;
+    background-color: $suggested-song-background-color;
+  }
+}
