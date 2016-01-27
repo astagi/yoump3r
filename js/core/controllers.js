@@ -4,7 +4,7 @@ angular.module('yoump3r.controllers', ['yoump3r.services.client'])
 
 }])
 
-.controller('CreatePlaylistController', ['$scope', 'yoump3rclient', function($scope, yoump3rclient) {
+.controller('CreatePlaylistController', ['$rootScope', '$scope', 'yoump3rclient', function($rootScope, $scope, yoump3rclient) {
 
   $scope.songs = [{}];
 
@@ -18,6 +18,14 @@ angular.module('yoump3r.controllers', ['yoump3r.services.client'])
 
   $scope.addNewSong = function() {
     $scope.songs.push({});
+  };
+
+  $scope.getSongsLength = function() {
+    return $scope.songs.length;
+  };
+
+  $scope.downloadAllSongs = function() {
+    $rootScope.$emit('downloadAll');
   };
 
 }]);
