@@ -7,5 +7,5 @@ venv
 .coverage
 settings_local.py
 static/
-js/libs
+libs/
 node_modules

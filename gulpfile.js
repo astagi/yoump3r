@@ -7,7 +7,7 @@ var sourcemaps = require('gulp-sourcemaps');
 
 var paths = {
   scripts: [
-    'js/libs/angular/angular.js',
+    'libs/angular/angular.js',
     'js/core/**/*.js'
   ],
   images: 'assets/img/**/*'
