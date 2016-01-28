@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '3g!d41fsf2qhke952c_ge!0c^gfxb2h=fj&)0!8m)upp8an93@'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-YOUTUBE_DEV_KEY = "AIzaS3cR3T"
+YOUTUBE_DEV_KEY = os.environ.get('YOUTUBE_DEV_KEY', 'AIzaS3cR3T')
 
 ALLOWED_HOSTS = []
 
@@ -123,8 +123,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+print ("ciao")
+
+print (BASE_DIR)
+
+STATIC_ROOT = 'staticfiles'
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'

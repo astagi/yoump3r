@@ -4,6 +4,6 @@
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
     $sceDelegateProvider.resourceUrlWhitelist([
       'self',
-      'http://www.youtubeinmp3.com/**'
+      'https://www.youtubeinmp3.com/**'
     ]);
   }]);
