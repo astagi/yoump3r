@@ -10,6 +10,8 @@
 
 <body>
     {% verbatim %}
+    <h1>Yoump3r</h1>
+    <h3>Create your mp3 playlist from YouTube</h3>
     <div ng-controller="CreatePlaylistController" class="col-md-6 col-md-offset-3">
         <song-row on-delete-song="deleteSong(deletedSong)" ng-model="song" ng-repeat="song in songs" song-row-tabindex="{{$index + 1}}">
         </song-row>
