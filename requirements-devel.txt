@@ -1,0 +1,9 @@
+-r requirements.txt
+
+pytest==2.8.7
+pytest-cov==2.2.1
+pytest-django==2.9.1
+pytest-mock==0.10.0
+
+coverage==4.0.3
+mock==1.3.0
