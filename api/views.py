@@ -19,6 +19,3 @@ class SongViewSet(viewsets.GenericViewSet):
             return Response(songs)
         except YouTubeToMp3ServiceException as ex:
             return Response({'error': unicode(ex)}, 400)
-
-    def get_queryset(self):
-        return []

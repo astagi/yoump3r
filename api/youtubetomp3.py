@@ -28,6 +28,8 @@ class YouTubeToMp3Service(object):
         return pl_item
 
     def search(self, query, part='id,snippet', maxResults=10):
+        if not query:
+            return []
         try:
             search_response = self._youtube.search().list(
                 q=query,
@@ -37,6 +39,7 @@ class YouTubeToMp3Service(object):
             ).execute()
 
             youtube_items = search_response.get("items", [])
+
             return [self._new_pl_item(item) for item in youtube_items]
         except HttpError as ex:
             raise YouTubeToMp3ServiceException(ex)
