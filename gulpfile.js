@@ -5,6 +5,8 @@ var karma = require('gulp-karma');
 var uglify = require('gulp-uglify');
 var minifyCss = require('gulp-minify-css');
 var sourcemaps = require('gulp-sourcemaps');
+var gulpProtractorAngular = require('gulp-angular-protractor');
+
 
 var paths = {
   scripts: [
@@ -54,6 +56,20 @@ gulp.task('sass', function () {
     .pipe(concat('bundle.min.css'))
     .pipe(minifyCss({compatibility: 'ie8'}))
     .pipe(gulp.dest('static/css'));
+});
+
+gulp.task('protractor', function(callback) {
+    gulp
+        .src(['example_spec.js'])
+        .pipe(gulpProtractorAngular({
+            'configFile': 'protractor.conf.js',
+            'debug': false,
+            'autoStartStopServer': true
+        }))
+        .on('error', function(e) {
+            console.log(e);
+        })
+        .on('end', callback);
 });
 
 gulp.task('default', ['scripts', 'partials', 'sass']);
