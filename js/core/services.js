@@ -18,7 +18,6 @@ angular.module('yoump3r.services.client', [])
         if (data.link) {
           data.link = data.link.replace('http:', 'https:');
         }
-        console.log(data.link);
         deferred.resolve(data.link);
       }).error(function(data){
         deferred.reject(undefined);
