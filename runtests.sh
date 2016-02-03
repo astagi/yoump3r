@@ -12,4 +12,5 @@ sleep 5
 py.test --cov-report term-missing --cov=. || quit 1
 gulp test || quit 1
 gulp protractor || quit 1
+
 quit 0

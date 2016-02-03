@@ -5,6 +5,7 @@ var karma = require('gulp-karma');
 var uglify = require('gulp-uglify');
 var minifyCss = require('gulp-minify-css');
 var sourcemaps = require('gulp-sourcemaps');
+var runSequence = require('run-sequence');
 var gulpProtractorAngular = require('gulp-angular-protractor');
 
 
@@ -44,6 +45,13 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('static/js'));
 });
 
+gulp.task('scripts-e2e', function() {
+  paths.scripts.push('libs/angular-mocks/angular-mocks.js');
+  return gulp.src(paths.scripts)
+    .pipe(concat('bundle.min.js'))
+    .pipe(gulp.dest('static/js'));
+});
+
 gulp.task('partials', function(){
   gulp.src('./partials/**/*.*')
   .pipe(gulp.dest('static/partials'));
@@ -57,18 +65,21 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('static/css'));
 });
 
-gulp.task('protractor', function(callback) {
-    gulp
-        .src(['example_spec.js'])
+gulp.task('raw-protractor', ['scripts-e2e'], function(callback) {
+    gulp.src(['example_spec.js'])
         .pipe(gulpProtractorAngular({
             'configFile': 'protractor.conf.js',
             'debug': false,
             'autoStartStopServer': true
         }))
         .on('error', function(e) {
-            console.log(e);
+            callback(e);
         })
         .on('end', callback);
+});
+
+gulp.task('protractor', function(callback) {
+    runSequence('raw-protractor', 'scripts');
 });
 
 gulp.task('default', ['scripts', 'partials', 'sass']);
