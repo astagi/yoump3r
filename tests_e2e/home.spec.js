@@ -2,19 +2,11 @@ describe('yoump3r home page', function() {
 
   beforeEach(function() {
     browser.get('http://localhost:8000');
-    browser.addMockModule('httpMocker', function() {
-      angular.module('httpMocker', ['ngMockE2E'])
+    browser.addMockModule('myModule', function() {
+      angular.module('myModule', ['ngMockE2E'])
       .run(function($httpBackend) {
-        $httpBackend.whenGET('http://jsonplaceholder.typicode.com/photos')
-          .respond([
-            {
-              albumId: 1,
-              id: 1,
-              title: "accusamus beatae ad",
-              url: "http://placehold.it/600/92c952",
-              thumbnailUrl: "http://placekitten.com/g/200/300"
-            }
-          ])
+        $httpBackend.whenGET(/^\/api\/v1\/songs\/search\/?q=.*/).respond([{}, {}, {}]);
+        $httpBackend.whenGET(/^\/static\/.*/).passThrough();
       })
     });
   });
@@ -23,8 +15,28 @@ describe('yoump3r home page', function() {
     expect(browser.getTitle()).toEqual('New playlist');
   });
 
-  it('should add a new song', function() {
-    expect(browser.getTitle()).toEqual('New playlist');
+  it('should add a new song clicking on add', function() {
+    element(by.css('.btn-add')).click();
+    element(by.css('.btn-add')).click();
+    element(by.css('.btn-add')).click();
+    var songInputs = element.all(by.css('song-row'));
+    expect(songInputs.count()).toEqual(4);
+  });
+
+  it('should remove a new song clicking on remove', function() {
+    element(by.css('.btn-add')).click();
+    element(by.css('.btn-add')).click();
+    element(by.css('.btn-add')).click();
+    var removeButtons = element.all(by.css('.btn-remove'));
+    removeButtons.get(0).click();
+    removeButtons.get(0).click();
+    var songInputs = element.all(by.css('song-row'));
+    expect(songInputs.count()).toEqual(2);
+  });
+
+  it('should search on typing', function() {
+    var directives = element.all(by.repeater('song in songs'));
+    directives.first().element(by.model('songSearch')).sendKeys('Bowie');
   });
 
 });

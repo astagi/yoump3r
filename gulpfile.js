@@ -65,7 +65,7 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('static/css'));
 });
 
-gulp.task('raw-protractor', ['scripts-e2e'], function(callback) {
+gulp.task('raw-protractor', ['scripts-e2e', 'partials', 'sass'], function(callback) {
     gulp.src(['example_spec.js'])
         .pipe(gulpProtractorAngular({
             'configFile': 'protractor.conf.js',
@@ -73,6 +73,7 @@ gulp.task('raw-protractor', ['scripts-e2e'], function(callback) {
             'autoStartStopServer': true
         }))
         .on('error', function(e) {
+            console.log(e);
             callback(e);
         })
         .on('end', callback);

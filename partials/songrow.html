@@ -5,9 +5,9 @@
       <input type="text" class="form-control" placeholder="Insert the song" aria-describedby="basic-addon2" ng-model="songSearch" ng-change="searchSong()" tabindex="{{tabIndex}}">
     </div>
     <div class="input-group center-block">
-      <a href="#" ng-click="removeSong()" tabindex="-1">Remove</a>
-      <a href="#" ng-click="downloadSong()" ng-show="selectedSong" tabindex="-1">Download MP3</a>
-      <a href="#" ng-click="toggleShowSuggestions()" ng-show="suggestedSongs" tabindex="-1">{{showSuggestions ? 'Hide suggested' : 'Show suggested'}}</a>
+      <a href="#" class='btn-remove' ng-click="removeSong()" tabindex="-1">Remove</a>
+      <a href="#" class='btn-download' ng-click="downloadSong()" ng-show="selectedSong" tabindex="-1">Download MP3</a>
+      <a href="#" class='btn-suggested' ng-click="toggleShowSuggestions()" ng-show="suggestedSongs" tabindex="-1">{{showSuggestions ? 'Hide suggested' : 'Show suggested'}}</a>
     </div>
     <div class="suggested-songs-list">
       <a href="#" ng-hide="$index > 0 && !showSuggestions" ng-click="selectSong(song)" ng-repeat="song in suggestedSongs|orderSongs:selectedSong" ng-class="{'selected' : $index == 0}" class="suggested-song" tabindex="-1">{{song.title}}</a>

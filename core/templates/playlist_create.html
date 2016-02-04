@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 <!DOCTYPE html>
-<html lang="en" ng-app="yoump3r">
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="{% static "css/bundle.min.css" %}" />
@@ -17,8 +17,8 @@
         </song-row>
         <hr/>
         <div>
-            <a href="#" ng-click="addNewSong()" type="submit" class="btn btn-default" tabindex="{{getSongsLength() + 1}}">Add song</a>
-            <a href="#" ng-click="downloadAllSongs()" type="submit" class="btn btn-default" tabindex="{{getSongsLength() + 2}}">Download all songs</a>
+            <a href="#" ng-click="addNewSong()" type="submit" class="btn btn-add btn-default" tabindex="{{getSongsLength() + 1}}">Add song</a>
+            <a href="#" ng-click="downloadAllSongs()" type="submit" class="btn btn-downloadall btn-default" tabindex="{{getSongsLength() + 2}}">Download all songs</a>
         </div>
     </div>
     {% endverbatim %}
