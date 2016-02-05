@@ -29,8 +29,8 @@ angular.module('yoump3r.components', ['yoump3r.services.client', 'yoump3r.filter
         scope.onDeleteSong({deletedSong: scope.ngModel});
       };
 
-      scope.canShowSuggestions = function () {
-        return (scope.showSuggestions == true && scope.suggestedSongs.length)
+      scope.canShowSuggestionToggle = function () {
+        return (scope.suggestedSongs && scope.suggestedSongs.length != 0);
       };
 
       scope.toggleShowSuggestions = function() {

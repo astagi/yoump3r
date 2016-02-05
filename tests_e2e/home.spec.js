@@ -5,7 +5,8 @@ describe('yoump3r home page', function() {
     browser.addMockModule('myModule', function() {
       angular.module('myModule', ['ngMockE2E'])
       .run(function($httpBackend) {
-        $httpBackend.whenGET(/^\/api\/v1\/songs\/search\/?q=.*/).respond([{}, {}, {}]);
+        $httpBackend.whenGET(/^\/api\/v1\/songs\/search\/\?q=$/).respond([]);
+        $httpBackend.whenGET(/^\/api\/v1\/songs\/search\/\?q=.*/).respond([{}, {}, {}]);
         $httpBackend.whenGET(/^\/static\/.*/).passThrough();
       })
     });
@@ -37,6 +38,16 @@ describe('yoump3r home page', function() {
   it('should search on typing', function() {
     var directives = element.all(by.repeater('song in songs'));
     directives.first().element(by.model('songSearch')).sendKeys('Bowie');
+  });
+
+  it('should remove show suggested button if youtube result is empty', function() {
+    var directives = element.all(by.repeater('song in songs'));
+    var firstDirectiveInput = directives.first().element(by.model('songSearch'));
+    expect(element(by.css('.btn-suggested')).isDisplayed()).toBeFalsy();
+    firstDirectiveInput.sendKeys('Bowie');
+    expect(element(by.css('.btn-suggested')).isDisplayed()).toBeTruthy();
+    firstDirectiveInput.clear();
+    expect(element(by.css('.btn-suggested')).isDisplayed()).toBeFalsy();
   });
 
 });
