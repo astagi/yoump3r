@@ -44,7 +44,7 @@ angular.module('yoump3r.components', ['yoump3r.services.client', 'yoump3r.filter
         .then(function(link) {
           scope.downloadMp3Url = link;
         }, function(link) {
-
+          alert("Video Not Found! Please try this link: " + link);
         });
       };
 

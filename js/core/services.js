@@ -13,14 +13,14 @@ angular.module('yoump3r.services.client', [])
     this.getDownloadLink = function (videoUrl) {
       var deferred = $q.defer();
       $http.get(
-        'https://www.youtubeinmp3.com/fetch/?format=JSON&video=' + videoUrl
+        urlBase + '/songs/link/?video=' + videoUrl
       ).success(function(data){
         if (data.link) {
           data.link = data.link.replace('http:', 'https:');
         }
         deferred.resolve(data.link);
       }).error(function(data){
-        deferred.reject(undefined);
+        deferred.reject(data.link);
       });
       return deferred.promise;
     };
