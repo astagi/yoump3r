@@ -4,7 +4,7 @@ from api.views import SongViewSet
 from apiclient.errors import HttpError
 from mock import Mock
 
-from .utils import load_json
+from .utils import load_json, MockResponse
 
 
 class GoogleServiceMock:
@@ -82,8 +82,41 @@ def test_youtube_search_exception(client, mocker):
 def test_extract_url_from_bad_responses():
     song_view_set = SongViewSet()
 
-    url = song_view_set._extract_url('<meta href="things url=http://ciao.com"')
+    url = song_view_set._extract_url('<meta href="things url=http://ciao.com" />')
     assert url == 'http://ciao.com'
 
     url = song_view_set._extract_url('<meta bad things>')
     assert url == None
+
+
+def test_get_download_link(client, mocker):
+    mocker.patch(
+        'api.views.requests.get',
+        return_value=MockResponse(200, '{"link":"http://mynewvideo/download"}'),
+    )
+    response = client.get(
+        '/api/v1/songs/link/?video='.format('http://youtube.mynewvideo')
+    )
+    assert response.status_code == 200
+    assert response.data == {'link': 'http://mynewvideo/download'}
+
+def test_get_download_not_valid_link(client, mocker):
+    mocker.patch(
+        'api.views.requests.get',
+        return_value=MockResponse(200, '<meta href="things url=http://ciao.com" />'),
+    )
+    response = client.get(
+        '/api/v1/songs/link/?video='.format('http://youtube.mynewvideo')
+    )
+    assert response.status_code == 404
+    assert response.data == {'link': 'http://ciao.com'}
+
+    mocker.patch(
+        'api.views.requests.get',
+        return_value=MockResponse(200, '<meta href="things" />'),
+    )
+    response = client.get(
+        '/api/v1/songs/link/?video='.format('http://youtube.mynewvideo')
+    )
+    assert response.status_code == 404
+    assert response.data == {'link': None}
