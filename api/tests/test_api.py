@@ -1,5 +1,6 @@
 import httplib2
 
+from api.views import SongViewSet
 from apiclient.errors import HttpError
 from mock import Mock
 
@@ -76,3 +77,13 @@ def test_youtube_search_exception(client, mocker):
     )
     assert response.status_code == 400
     assert response.data == {'error': '<HttpError 500 when requesting uri returned "BAD">'}
+
+
+def test_extract_url_from_bad_responses():
+    song_view_set = SongViewSet()
+
+    url = song_view_set._extract_url('<meta href="things url=http://ciao.com"')
+    assert url == 'http://ciao.com'
+
+    url = song_view_set._extract_url('<meta bad things>')
+    assert url == None
