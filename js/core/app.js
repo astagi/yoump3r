@@ -9,14 +9,6 @@ yoump3rApp.config(['$httpProvider', '$sceDelegateProvider', function($httpProvid
   ]);
 }]);
 
-//var myAppDev = angular.module('appdev', ['yoump3r', 'ngMockE2E']);
-//myAppDev.run(['$httpBackend',
-//  function ($httpBackend) {
-//    $httpBackend.whenGET('/api/v1/songs/search/?q=David').respond([{}, {}, {}]);
-//    $httpBackend.whenGET(/^\/static\/.*/).passThrough();
-//  }
-//]);
-
 angular.element(document).ready(function() {
   angular.bootstrap(document, ['yoump3r']);
 });
