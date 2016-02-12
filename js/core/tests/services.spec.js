@@ -37,8 +37,8 @@ describe('Service: yoump3rclient', function () {
       link: 'http://ciao.com'
     };
 
-    $httpBackend.when('GET', 'https://www.youtubeinmp3.com/fetch/?format=JSON&video=' + videoUrl).respond(videoSearchResponse);
-    $httpBackend.expectGET('https://www.youtubeinmp3.com/fetch/?format=JSON&video=' + videoUrl);
+    $httpBackend.when('GET', '/api/v1/songs/link/?video=' + videoUrl).respond(videoSearchResponse);
+    $httpBackend.expectGET('/api/v1/songs/link/?video=' + videoUrl);
 
     yoump3rclient.getDownloadLink(videoUrl)
     .then(function (data) {
@@ -53,8 +53,8 @@ describe('Service: yoump3rclient', function () {
     var called = false;
     var videoUrl = 'ciao';
 
-    $httpBackend.when('GET', 'https://www.youtubeinmp3.com/fetch/?format=JSON&video=' + videoUrl).respond(500, 'error');
-    $httpBackend.expectGET('https://www.youtubeinmp3.com/fetch/?format=JSON&video=' + videoUrl);
+    $httpBackend.when('GET', '/api/v1/songs/link/?video=' + videoUrl).respond(500, 'error');
+    $httpBackend.expectGET('/api/v1/songs/link/?video=' + videoUrl);
 
     yoump3rclient.getDownloadLink(videoUrl)
     .then(undefined,function (data) {

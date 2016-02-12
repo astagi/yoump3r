@@ -39,16 +39,21 @@ angular.module('yoump3r.components', ['yoump3r.services.client', 'yoump3r.filter
 
       scope.downloadSong = function () {
         scope.downloadMp3Url = '';
+        scope.errorDownload = false;
+        scope.externalLink = null;
         yoump3rclient
         .getDownloadLink('https://www.youtube.com/watch?v=' + scope.selectedSong.id)
         .then(function(link) {
           scope.downloadMp3Url = link;
         }, function(link) {
-
+          scope.externalLink = link;
+          scope.errorDownload = true;
         });
       };
 
       scope.selectSong = function (song) {
+        scope.errorDownload = false;
+        scope.externalLink = null;
         scope.selectedSong = song;
       };
 
