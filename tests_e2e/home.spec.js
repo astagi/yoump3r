@@ -6,19 +6,25 @@ describe('yoump3r home page', function() {
 
   beforeEach(function() {
     backend = new MockBackendE2E(browser);
-    backend.mock(function(httpBackend) {
+    backend.commonMock(function(httpBackend) {
       httpBackend.whenGET(/^\/static\/.*/).passThrough();
       httpBackend.whenGET(/^\/api\/v1\/songs\/search\/\?q=$/).respond([]);
       httpBackend.whenGET(/^\/api\/v1\/songs\/search\/\?q=.*/).respond([{}, {}, {}]);
     });
   });
 
+  afterEach(function() {
+    backend.clear();
+  });
+
   it('should load the page', function() {
+    backend.mock();
     browser.get('http://localhost:8000');
     expect(browser.getTitle()).toEqual('New playlist');
   });
 
   it('should add a new song clicking on add', function() {
+    backend.mock();
     browser.get('http://localhost:8000');
     element(by.css('.btn-add')).click();
     element(by.css('.btn-add')).click();
@@ -28,6 +34,7 @@ describe('yoump3r home page', function() {
   });
 
   it('should remove a new song clicking on remove', function() {
+    backend.mock();
     browser.get('http://localhost:8000');
     element(by.css('.btn-add')).click();
     element(by.css('.btn-add')).click();
@@ -40,12 +47,14 @@ describe('yoump3r home page', function() {
   });
 
   it('should search on typing', function() {
+    backend.mock();
     browser.get('http://localhost:8000');
     var directives = element.all(by.repeater('song in songs'));
     directives.first().element(by.model('songSearch')).sendKeys('Bowie');
   });
 
   it('should remove show suggested button if youtube result is empty', function() {
+    backend.mock();
     browser.get('http://localhost:8000');
     var directives = element.all(by.repeater('song in songs'));
     var firstDirectiveInput = directives.first().element(by.model('songSearch'));

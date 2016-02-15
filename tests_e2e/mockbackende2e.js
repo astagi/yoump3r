@@ -1,26 +1,27 @@
 function MockBackendE2E(browser) {
   this._browser = browser;
-  this._mockFunctions = [];
-  this.clear();
+  this._commonMockFunction = 'function(backend) {}';
+}
+
+MockBackendE2E.prototype.commonMock = function (commonMockFunction) {
+  this._commonMockFunction = commonMockFunction;
 }
 
 MockBackendE2E.prototype.mock = function (mockFunction) {
-  if (mockFunction) {
-    this._mockFunctions.push(mockFunction);
-  }
-  this.clear();
+  mockFunction = mockFunction || 'function(backend) {}';
   this._browser.addMockModule(
     'mockBackendModuleE2E',
     function() {
       eval(arguments[0]);
+      eval(arguments[1]);
       angular.module('mockBackendModuleE2E', ['ngMockE2E'])
       .run(function($httpBackend) {
-        for (var i = 0 ; mockFunctionsJS.length ; i++) {
-          mockFunctionsJS[i]($httpBackend);
-        }
+        commonMockFunctionJS($httpBackend);
+        mockFunctionJS($httpBackend);
       })
     },
-    'var mockFunctionsJS = ' + this._mockFunctions
+    'var commonMockFunctionJS = ' + this._commonMockFunction,
+    'var mockFunctionJS = ' + mockFunction
   );
 }
 
