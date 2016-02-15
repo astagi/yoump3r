@@ -58,7 +58,7 @@ gulp.task('partials', function(){
 });
 
 gulp.task('sass', function () {
-  gulp.src('./sass/**/*.scss')
+  gulp.src('./sass/main.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(concat('bundle.min.css'))
     .pipe(minifyCss({compatibility: 'ie8'}))
