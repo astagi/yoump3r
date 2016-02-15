@@ -9,9 +9,9 @@
       <span ng-show="externalLink" class="error-link">Try to download your song <a ng-href="{{externalLink}}" target="_blank">here</a>!</span>
     </div>
     <div class="input-group center-block">
-      <a href="#" class='btn-remove' ng-click="removeSong()" tabindex="-1">Remove</a>
-      <a href="#" class='btn-download' ng-click="downloadSong()" ng-show="selectedSong" tabindex="-1">Download MP3</a>
-      <a href="#" class='btn-suggested' ng-click="toggleShowSuggestions()" ng-show="canShowSuggestionToggle()" tabindex="-1">{{showSuggestions ? 'Hide suggested' : 'Show suggested'}}</a>
+      <button href="#" class='btn btn-default btn-remove' ng-click="removeSong()" tabindex="-1">Remove</button>
+      <button href="#" class='btn btn-default btn-download' ng-click="downloadSong()" ng-show="selectedSong" tabindex="-1">Download MP3</button>
+      <button href="#" class='btn btn-default btn-suggested' ng-click="toggleShowSuggestions()" ng-show="canShowSuggestionToggle()" tabindex="-1">{{showSuggestions ? 'Hide suggested' : 'Show suggested'}}</button>
     </div>
     <div class="suggested-songs-list">
       <a href="#" ng-hide="$index > 0 && !showSuggestions" ng-click="selectSong(song)" ng-repeat="song in suggestedSongs|orderSongs:selectedSong" ng-class="{'selected' : $index == 0}" class="suggested-song" tabindex="-1">{{song.title}}</a>
