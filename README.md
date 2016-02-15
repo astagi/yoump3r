@@ -22,3 +22,7 @@ To run tests
 ## Run development server
 
     $ ./rundev.sh
+
+## Run watcher
+
+    $ gulp watch

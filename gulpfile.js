@@ -15,6 +15,9 @@ var paths = {
     'js/core/**/*.js',
     '!js/core/tests/*.js'
   ],
+  partials: './partials/**/*.*',
+  sass: './sass/**/*.scss',
+  sass_main: './sass/main.scss',
   images: 'assets/img/**/*'
 };
 
@@ -53,16 +56,28 @@ gulp.task('scripts-e2e', function() {
 });
 
 gulp.task('partials', function(){
-  gulp.src('./partials/**/*.*')
+  gulp.src(paths.partials)
   .pipe(gulp.dest('static/partials'));
 });
 
 gulp.task('sass', function () {
-  gulp.src('./sass/main.scss')
+  gulp.src(paths.sass_main)
     .pipe(sass().on('error', sass.logError))
     .pipe(concat('bundle.min.css'))
     .pipe(minifyCss({compatibility: 'ie8'}))
     .pipe(gulp.dest('static/css'));
+});
+
+gulp.task('watch-partials', function () {
+  gulp.watch(paths.partials, ['partials']);
+});
+
+gulp.task('watch-sass', function () {
+  gulp.watch(paths.sass, ['sass']);
+});
+
+gulp.task('watch-scripts', function () {
+  gulp.watch(paths.scripts, ['scripts']);
 });
 
 gulp.task('raw-protractor', ['scripts-e2e', 'partials', 'sass'], function(callback) {
@@ -83,4 +98,5 @@ gulp.task('protractor', function(callback) {
     runSequence('raw-protractor', 'scripts');
 });
 
+gulp.task('watch', ['watch-scripts', 'watch-partials', 'watch-sass']);
 gulp.task('default', ['scripts', 'partials', 'sass']);
