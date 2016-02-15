@@ -18,5 +18,8 @@
     "angular": "~1.4.1",
     "angular-mocks": "^1.4.1",
     "bootstrap-sass": "~3.3.6"
+  },
+  "resolutions": {
+    "angular": "~1.4.1"
   }
 }
