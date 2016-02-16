@@ -14,6 +14,6 @@
       <button href="#" class='btn btn-default btn-suggested' ng-click="toggleShowSuggestions()" ng-show="canShowSuggestionToggle()" tabindex="-1">{{showSuggestions ? 'Hide suggested' : 'Show suggested'}}</button>
     </div>
     <div class="suggested-songs-list">
-      <a href="#" ng-hide="$index > 0 && !showSuggestions" ng-click="selectSong(song)" ng-repeat="song in suggestedSongs|orderSongs:selectedSong" ng-class="{'selected' : $index == 0}" class="suggested-song" tabindex="-1">{{song.title}}</a>
+      <span ng-hide="$index > 0 && !showSuggestions" ng-click="selectSong(song)" ng-repeat="song in suggestedSongs|orderSongs:selectedSong" ng-class="{'selected' : $index == 0}" class="suggested-song" tabindex="-1">{{song.title}}</span>
     </div>
 </div>

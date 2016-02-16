@@ -20,8 +20,9 @@ $suggested-song-background-color: green;
   }
 }
 
-a.suggested-song, button.suggested-song {
+span.suggested-song {
   &:hover, &:focus, &.active:hover, &.active:focus {
+    cursor: pointer;
     text-decoration: none;
     color: $suggested-song-color;
     background-color: $suggested-song-background-color;
