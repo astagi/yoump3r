@@ -26,16 +26,12 @@ class SongViewSet(viewsets.GenericViewSet):
     @list_route(methods=['get'])
     def link(self, request):
         video_url = request.GET.get('video', '')
-        link_url = "https://www.youtubeinmp3.com/fetch/?format=JSON&video={0}".format(video_url)
-        r = requests.get(link_url)
-        bundle = {'link': ''}
-        try:
-            bundle['link'] = r.json()['link']
-        except:
-            bundle['link'] = self._extract_url(r.text)
-            return Response(bundle, 404)
-        return Response(bundle)
+        link_url = "http://www.youtubeinmp3.com/fetch/?video={0}".format(video_url)
+        return Response({'link': link_url})
 
+    @list_route(methods=['get'])
+    def notfound(self, request):
+        return Response('No video was found')
 
     def _extract_url(self, text):
         match = re.search(".* url=(.*)\"", text)

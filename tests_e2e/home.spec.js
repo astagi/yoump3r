@@ -65,36 +65,10 @@ describe('yoump3r home page', function() {
     expect(element(by.css('.btn-suggested')).isDisplayed()).toBeFalsy();
   });
 
-  it('should show error and link on bad video', function() {
-    backend.mock(function(httpBackend) {
-      httpBackend.whenGET(/^\/api\/v1\/songs\/link\/\?video=.*/).respond(
-        404, {'link': 'http://myvideo.download/'}
-      );
-    });
-    browser.get('http://localhost:8000');
-
-    var directives = element.all(by.repeater('song in songs'));
-    var directive = directives.first();
-    var firstDirectiveInput = directive.element(by.model('songSearch'));
-    firstDirectiveInput.sendKeys('Lucio');
-
-    var linkVideoSuggested = directive.element(by.css('a[href="http://myvideo.download/"]'));
-    expect(linkVideoSuggested.isPresent()).toBeFalsy();
-
-    var downloadButton = directive.element(by.css('.btn-download'));
-    downloadButton.click();
-
-    expect(linkVideoSuggested.isDisplayed()).toBeTruthy();
-
-    firstDirectiveInput.sendKeys('Battisti');
-    expect(linkVideoSuggested.isPresent()).toBeFalsy();
-
-  });
-
   it('should show only error on blank link', function() {
     backend.mock(function(httpBackend) {
       httpBackend.whenGET(/^\/api\/v1\/songs\/link\/\?video=.*/).respond(
-        404, {'link': null}
+        {'link': '/api/v1/songs/notfound/'}
       );
     });
     browser.get('http://localhost:8000');
@@ -104,8 +78,8 @@ describe('yoump3r home page', function() {
     firstDirectiveInput.sendKeys('Null');
     var downloadButton = directive.element(by.css('.btn-download'));
     downloadButton.click();
-    var linkVideoSuggested = directive.element(by.css('.error-link'));
-    expect(linkVideoSuggested.isDisplayed()).toBeFalsy();
+    var errorNotFound = directive.element(by.css('.error-not-found'));
+    expect(errorNotFound.isDisplayed()).toBeTruthy();
   });
 
   it('should change iframe source on single download', function() {

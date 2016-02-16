@@ -4,8 +4,7 @@ yoump3rApp.config(['$httpProvider', '$sceDelegateProvider', function($httpProvid
   $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
   $sceDelegateProvider.resourceUrlWhitelist([
     'self',
-    'http://www.youtubeinmp3.com/**',
-    'https://www.youtubeinmp3.com/**'
+    /^http(s?):\/\/.*\.youtubeinmp3.com\/.*/
   ]);
 }]);
 

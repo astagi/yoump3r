@@ -90,33 +90,9 @@ def test_extract_url_from_bad_responses():
 
 
 def test_get_download_link(client, mocker):
-    mocker.patch(
-        'api.views.requests.get',
-        return_value=MockResponse(200, '{"link":"http://mynewvideo/download"}'),
-    )
     response = client.get(
-        '/api/v1/songs/link/?video='.format('http://youtube.mynewvideo')
+        '/api/v1/songs/link/?video={0}'.format('http://youtube.mynewvideo')
     )
     assert response.status_code == 200
-    assert response.data == {'link': 'http://mynewvideo/download'}
+    assert response.data == {'link': 'http://www.youtubeinmp3.com/fetch/?video=http://youtube.mynewvideo'}
 
-def test_get_download_not_valid_link(client, mocker):
-    mocker.patch(
-        'api.views.requests.get',
-        return_value=MockResponse(200, '<meta href="things url=http://ciao.com" />'),
-    )
-    response = client.get(
-        '/api/v1/songs/link/?video='.format('http://youtube.mynewvideo')
-    )
-    assert response.status_code == 404
-    assert response.data == {'link': 'http://ciao.com'}
-
-    mocker.patch(
-        'api.views.requests.get',
-        return_value=MockResponse(200, '<meta href="things" />'),
-    )
-    response = client.get(
-        '/api/v1/songs/link/?video='.format('http://youtube.mynewvideo')
-    )
-    assert response.status_code == 404
-    assert response.data == {'link': None}

@@ -40,20 +40,27 @@ angular.module('yoump3r.components', ['yoump3r.services.client', 'yoump3r.filter
       scope.downloadSong = function () {
         scope.downloadMp3Url = '';
         scope.errorDownload = false;
-        scope.externalLink = null;
         yoump3rclient
         .getDownloadLink('https://www.youtube.com/watch?v=' + scope.selectedSong.id)
         .then(function(link) {
           scope.downloadMp3Url = link;
+          console.log('iframe contents');
+          var iframe = element.find('iframe');
+          iframe.on("load", function() {
+            var result = iframe.contents().find('body')[0].innerHTML;
+            if (result.indexOf("No video was found") > -1) {
+              scope.errorDownload = true;
+              scope.$apply();
+            }
+          });
+
         }, function(link) {
-          scope.externalLink = link;
           scope.errorDownload = true;
         });
       };
 
       scope.selectSong = function (song) {
         scope.errorDownload = false;
-        scope.externalLink = null;
         scope.selectedSong = song;
       };
 

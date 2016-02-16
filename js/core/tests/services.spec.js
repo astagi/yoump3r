@@ -46,7 +46,7 @@ describe('Service: yoump3rclient', function () {
     });
 
     $httpBackend.flush();
-    expect(link).toEqual('https://ciao.com');
+    expect(link).toEqual('http://ciao.com');
   });
 
   it('should call the reject callback on error', function () {

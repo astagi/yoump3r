@@ -16,7 +16,7 @@ angular.module('yoump3r.services.client', [])
         urlBase + '/songs/link/?video=' + videoUrl
       ).success(function(data){
         if (data.link) {
-          data.link = data.link.replace('http:', 'https:');
+          data.link = data.link.replace('https:', 'http:');
         }
         deferred.resolve(data.link);
       }).error(function(data){
