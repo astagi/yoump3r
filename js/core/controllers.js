@@ -12,6 +12,7 @@ angular.module('yoump3r.controllers', ['yoump3r.services.client'])
     for (var i = 0 ; i < $scope.songs.length ; i++) {
       if ($scope.songs[i].$$hashKey == deletedSong.$$hashKey) {
         $scope.songs.splice(i, 1);
+        return;
       }
     }
   };
