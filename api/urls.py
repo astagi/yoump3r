@@ -1,4 +1,9 @@
-from .views import SongViewSet
+from django.conf import settings
+
+if settings.TEST:
+    from .mock_views import MockSongViewSet as SongViewSet
+else:
+    from .views import SongViewSet
 
 from django.conf.urls import url, include
 from rest_framework.routers import SimpleRouter
