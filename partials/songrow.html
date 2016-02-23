@@ -4,8 +4,9 @@
       <span class="input-group-addon" id="basic-addon2">Song</span>
       <input type="text" class="form-control" placeholder="Insert the song" aria-describedby="basic-addon2" ng-model="songSearch" ng-change="searchSong()" tabindex="{{tabIndex}}">
     </div>
-    <div class="error-messages" ng-show="errorDownload">
-      <span class="error-not-found">Sorry, video not found!</span>
+    <div class="error-messages" ng-show="errorDownload > 0">
+      <span ng-show="errorDownload == 1" class="error-not-found">Sorry, video not found!</span>
+      <span ng-show="errorDownload == 2" class="error-not-found">Sorry, video is too long!</span>
       <span ng-show="externalLink" class="error-link">Try to download your song <a ng-href="{{externalLink}}" target="_blank">here</a>!</span>
     </div>
     <div class="input-group center-block">

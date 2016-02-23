@@ -5,7 +5,7 @@ function quit {
     exit $1
 }
 
-python manage.py runserver --settin=yoump3r.settings_test &
+python manage.py runserver --settings=yoump3r.settings_test &
 
 sleep 5
 

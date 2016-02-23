@@ -26,6 +26,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+TEST = False
+
 YOUTUBE_DEV_KEY = os.environ.get('YOUTUBE_DEV_KEY', 'AIzaS3cR3T')
 
 ALLOWED_HOSTS = []

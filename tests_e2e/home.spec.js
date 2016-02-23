@@ -82,6 +82,23 @@ describe('yoump3r home page', function() {
     expect(errorNotFound.isDisplayed()).toBeTruthy();
   });
 
+  it('should show error on video too long', function() {
+    backend.mock(function(httpBackend) {
+      httpBackend.whenGET(/^\/api\/v1\/songs\/link\/\?video=.*/).respond(
+        {'link': '/api/v1/songs/videotoolong/'}
+      );
+    });
+    browser.get('http://localhost:8000');
+    var directives = element.all(by.repeater('song in songs'));
+    var directive = directives.first();
+    var firstDirectiveInput = directive.element(by.model('songSearch'));
+    firstDirectiveInput.sendKeys('Null');
+    var downloadButton = directive.element(by.css('.btn-download'));
+    downloadButton.click();
+    var errorNotFound = directive.all(by.css('.error-not-found'));
+    expect(errorNotFound.get(1).isDisplayed()).toBeTruthy();
+  });
+
   it('should change iframe source on single download', function() {
 
   });

@@ -39,7 +39,7 @@ angular.module('yoump3r.components', ['yoump3r.services.client', 'yoump3r.filter
 
       scope.downloadSong = function () {
         scope.downloadMp3Url = '';
-        scope.errorDownload = false;
+        scope.errorDownload = 0;
         yoump3rclient
         .getDownloadLink('https://www.youtube.com/watch?v=' + scope.selectedSong.id)
         .then(function(link) {
@@ -49,18 +49,22 @@ angular.module('yoump3r.components', ['yoump3r.services.client', 'yoump3r.filter
           iframe.on("load", function() {
             var result = iframe.contents().find('body')[0].innerHTML;
             if (result.indexOf("No video was found") > -1) {
-              scope.errorDownload = true;
+              scope.errorDownload = 1;
+              scope.$apply();
+            }
+            if (result.indexOf("Your video is too long") > -1) {
+              scope.errorDownload = 2;
               scope.$apply();
             }
           });
 
         }, function(link) {
-          scope.errorDownload = true;
+          scope.errorDownload = 1;
         });
       };
 
       scope.selectSong = function (song) {
-        scope.errorDownload = false;
+        scope.errorDownload = 0;
         scope.selectedSong = song;
       };
 

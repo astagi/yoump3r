@@ -33,6 +33,10 @@ class SongViewSet(viewsets.GenericViewSet):
     def notfound(self, request):
         return Response('No video was found')
 
+    @list_route(methods=['get'])
+    def videotoolong(self, request):
+        return Response('Your video is too long')
+
     def _extract_url(self, text):
         match = re.search(".* url=(.*)\"", text)
         if match:
