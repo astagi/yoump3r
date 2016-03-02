@@ -100,10 +100,23 @@ describe('yoump3r home page', function() {
   });
 
   it('should change iframe source on single download', function() {
+    backend.mock(function(httpBackend) {
+      httpBackend.whenGET(/^\/api\/v1\/songs\/link\/\?video=.*/).respond(
+        {'link': 'http://www.youtubeinmp3.com/linksong'}
+      );
+    });
+    browser.get('http://localhost:8000');
+    var directives = element.all(by.repeater('song in songs'));
+    var directive = directives.first();
+    var firstDirectiveInput = directive.element(by.model('songSearch'));
+    firstDirectiveInput.sendKeys('Song I want');
+    var downloadButton = directive.element(by.css('.btn-download'));
+    downloadButton.click();
 
-  });
-
-  it('should change all the iframe sources on download all', function() {
+    var iframe = directive.element(by.css('iframe'));
+    iframe.getAttribute('src').then(function(attr) {
+      expect(attr).toBe("http://www.youtubeinmp3.com/linksong");
+    });
 
   });
 

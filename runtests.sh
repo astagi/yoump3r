@@ -7,7 +7,7 @@ function quit {
 
 python manage.py runserver --settings=yoump3r.settings_test &
 
-sleep 5
+sleep 1
 
 py.test --cov-report term-missing --cov=. || quit 1
 gulp test || quit 1
